@@ -2,8 +2,13 @@
   <h2>Films</h2>
   <ul>
     <li *ngFor="let film of films" [title]="film.opening_crawl">
-      Episode {{ film.episode_id }} - {{ film.title }} [Directed by
-      {{ film.director }}, Produced by {{ film.producer }}]
+      <span class="title-text"
+        >Episode {{ film.episode_id }} - {{ film.title }}</span
+      >
+      <span class="director-text"
+        >&nbsp;[Directed by {{ film.director }}, Produced by
+        {{ film.producer }}]</span
+      >
     </li>
   </ul>
 </div>
