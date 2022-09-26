@@ -1,0 +1,9 @@
+<div *ngIf="films != null">
+  <h2>Films</h2>
+  <ul>
+    <li *ngFor="let film of films" [title]="film.opening_crawl">
+      Episode {{ film.episode_id }} - {{ film.title }} [Directed by
+      {{ film.director }}, Produced by {{ film.producer }}]
+    </li>
+  </ul>
+</div>
