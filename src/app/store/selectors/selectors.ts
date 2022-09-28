@@ -10,7 +10,39 @@ export const getCurrentPerson = createSelector(
   (state) => state?.currentPerson
 );
 
-export const getFilms = createSelector(
+export const getPersonName = createSelector(
   getCurrentPerson,
-  (person) => person?.films_full
+  (person) => person?.name
+);
+export const getPersonHairColor = createSelector(
+  getCurrentPerson,
+  (person) => person?.hair_color
+);
+export const getPersonGender = createSelector(
+  getCurrentPerson,
+  (person) => person?.gender
+);
+export const getPersonHeight = createSelector(
+  getCurrentPerson,
+  (person) => person?.height
+);
+
+export const getAdditionalData = createSelector(
+  getAppState,
+  (state) => state?.apiStuff
+);
+
+export const getFilms = createSelector(
+  getAdditionalData,
+  (data) => data?.films
+);
+
+export const getShips = createSelector(
+  getAdditionalData,
+  (data) => data?.ships
+);
+
+export const getVehicles = createSelector(
+  getAdditionalData,
+  (data) => data?.vehicles
 );

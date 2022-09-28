@@ -4,9 +4,11 @@ import { Observable } from 'rxjs';
 
 import { IAppState } from '../store/app.interface';
 import { fetchPerson } from '../store/actions/actions';
-import { getPeopleComponentData } from '../store/selectors/people.component.selectors';
-import { Film } from '../models';
-import { getFilms } from '../store/selectors/selectors';
+import { AdditionalApiViewModel, PeopleComponentViewModel } from '../models';
+import {
+  getPeopleComponentData,
+  getAdditionalApiData,
+} from '../store/selectors';
 
 @Component({
   selector: 'app-starwars-container',
@@ -14,14 +16,14 @@ import { getFilms } from '../store/selectors/selectors';
   styleUrls: ['./starwars-container.component.css'],
 })
 export class StarwarsContainerComponent implements OnInit {
-  personComponentData$: Observable<any>;
-  films$: Observable<Film[]>;
+  personComponentData$: Observable<PeopleComponentViewModel>;
+  additionalApiData$: Observable<AdditionalApiViewModel>;
 
   constructor(private store: Store<IAppState>) {}
 
   ngOnInit(): void {
     this.personComponentData$ = this.store.pipe(select(getPeopleComponentData));
-    this.films$ = this.store.pipe(select(getFilms));
+    this.additionalApiData$ = this.store.pipe(select(getAdditionalApiData));
 
     this.store.dispatch(fetchPerson({ personId: 1 }));
   }

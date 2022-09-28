@@ -1,2 +1,4 @@
 <app-people [peopleData]="personComponentData$ | async"></app-people>
-<app-films [films]="films$ | async"></app-films>
+<app-films [films]="(additionalApiData$ | async).films"></app-films>
+<app-starships [ships]="(additionalApiData$ | async).ships"></app-starships>
+<app-vehicles [vehicles]="(additionalApiData$ | async).vehicles"></app-vehicles>

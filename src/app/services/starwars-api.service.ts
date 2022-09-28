@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Film, People } from '../models';
-import { forkJoin, Observable, switchMap, of } from 'rxjs';
+import { Film, People, Starship, Vehicle } from '../models';
+import { forkJoin, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class StarWarsApiService {
@@ -11,17 +11,26 @@ export class StarWarsApiService {
   constructor(private http: HttpClient) {}
 
   getPerson(personId: number): Observable<People> {
-    return this.http.get<People>(`${this.baseUrl}people/${personId}`).pipe(
-      switchMap((person) => {
-        const filmGets: Observable<Film>[] = [];
-        person.films.forEach((filmUrl) =>
-          filmGets.push(this.http.get<Film>(filmUrl))
-        );
-        return forkJoin(filmGets).pipe(
-          switchMap((films) => (person.films_full = films)),
-          switchMap(() => of(person))
-        );
-      })
+    return this.http.get<People>(`${this.baseUrl}people/${personId}`);
+  }
+
+  getFilms(films: string[]): Observable<Film[]> {
+    const filmGets: Observable<Film>[] = [];
+    films.forEach((filmUrl) => filmGets.push(this.http.get<Film>(filmUrl)));
+    return forkJoin(filmGets);
+  }
+
+  getStarships(ships: string[]): Observable<Starship[]> {
+    const shipGets: Observable<Starship>[] = [];
+    ships.forEach((shipUrl) => shipGets.push(this.http.get<Starship>(shipUrl)));
+    return forkJoin(shipGets);
+  }
+
+  getVehicles(vehicles: string[]): Observable<Vehicle[]> {
+    const vehicleGets: Observable<Vehicle>[] = [];
+    vehicles.forEach((vehicleUrl) =>
+      vehicleGets.push(this.http.get<Vehicle>(vehicleUrl))
     );
+    return forkJoin(vehicleGets);
   }
 }

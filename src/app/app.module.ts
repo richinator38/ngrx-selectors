@@ -12,9 +12,11 @@ import { PeopleComponent } from './people/people.component';
 import { AppEffects } from './store/effects/effects';
 import { StarwarsContainerComponent } from './starwars-container/starwars-container.component';
 import { FilmsComponent } from './films/films.component';
+import { StarshipsComponent } from './starships/starships.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
 
 @NgModule({
-  declarations: [AppComponent, PeopleComponent, StarwarsContainerComponent, FilmsComponent],
+  declarations: [AppComponent, PeopleComponent, StarwarsContainerComponent, FilmsComponent, StarshipsComponent, VehiclesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

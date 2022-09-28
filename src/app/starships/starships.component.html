@@ -1,0 +1,8 @@
+<div *ngIf="ships != null">
+  <h2>Starships</h2>
+  <ul>
+    <li *ngFor="let ship of ships">
+      <strong>{{ ship.name }}</strong> [{{ ship.starship_class }}]
+    </li>
+  </ul>
+</div>

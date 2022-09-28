@@ -1,0 +1,8 @@
+<div *ngIf="vehicles != null">
+  <h2>Vehicles</h2>
+  <ul>
+    <li *ngFor="let v of vehicles">
+      <strong>{{ v.name }}</strong> [{{ v.manufacturer }}]
+    </li>
+  </ul>
+</div>

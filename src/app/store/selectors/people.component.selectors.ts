@@ -1,37 +1,39 @@
 import { createSelector } from '@ngrx/store';
 
-import { getCurrentPerson } from './selectors';
+import {
+  getPersonGender,
+  getPersonHairColor,
+  getPersonHeight,
+  getPersonName,
+} from './selectors';
 import { PeopleComponentViewModel } from '../../models/people.component.view-model';
 
 /**
  * For these calculations, see this site:
  * https://www.thecalculatorsite.com/conversions/common/cm-to-feet-inches.php
  */
-export const getHeightFormatted = createSelector(getCurrentPerson, (person) => {
-  if (person) {
-    const heightInCm = person.height;
-    const heightInFeetFractional = heightInCm / 30.48;
-    const heightInFeet = Math.floor(heightInFeetFractional);
-    const remainderInches = Math.round(frac(heightInFeetFractional) * 12);
-    return `${heightInFeet}' ${remainderInches}"`;
-  }
-
-  return '';
+export const getHeightFormatted = createSelector(getPersonHeight, (height) => {
+  const heightInCm = height;
+  const heightInFeetFractional = heightInCm / 30.48;
+  const heightInFeet = Math.floor(heightInFeetFractional);
+  const remainderInches = Math.round(frac(heightInFeetFractional) * 12);
+  return `${heightInFeet}' ${remainderInches}"`;
 });
 
 export const getPeopleComponentData = createSelector(
-  getCurrentPerson,
+  getPersonName,
+  getPersonHairColor,
+  getPersonGender,
   getHeightFormatted,
-  (person, height) => {
-    if (person) {
+  (name, hair, gender, height) => {
+    if (name) {
       return new PeopleComponentViewModel({
-        name: person.name,
-        hair_color: person.hair_color,
-        gender: person.gender,
+        name: name,
+        hair_color: hair,
+        gender: gender,
         height,
       });
     }
-
     return null;
   }
 );
