@@ -18,6 +18,7 @@ import {
 export class StarwarsContainerComponent implements OnInit {
   personComponentData$: Observable<PeopleComponentViewModel>;
   additionalApiData$: Observable<AdditionalApiViewModel>;
+  selectedPerson: string = '1';
 
   constructor(private store: Store<IAppState>) {}
 
@@ -25,6 +26,10 @@ export class StarwarsContainerComponent implements OnInit {
     this.personComponentData$ = this.store.pipe(select(getPeopleComponentData));
     this.additionalApiData$ = this.store.pipe(select(getAdditionalApiData));
 
-    this.store.dispatch(fetchPerson({ personId: 1 }));
+    this.getPerson();
+  }
+
+  getPerson() {
+    this.store.dispatch(fetchPerson({ personId: +this.selectedPerson }));
   }
 }

@@ -14,13 +14,22 @@ import { StarwarsContainerComponent } from './starwars-container/starwars-contai
 import { FilmsComponent } from './films/films.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, PeopleComponent, StarwarsContainerComponent, FilmsComponent, StarshipsComponent, VehiclesComponent],
+  declarations: [
+    AppComponent,
+    PeopleComponent,
+    StarwarsContainerComponent,
+    FilmsComponent,
+    StarshipsComponent,
+    VehiclesComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([AppEffects]),

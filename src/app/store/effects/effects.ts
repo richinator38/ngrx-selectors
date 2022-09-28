@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { switchMap, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 
 import { StarWarsApiService } from 'src/app/services/starwars-api.service';
 import {
@@ -24,14 +25,18 @@ export class AppEffects {
       switchMap((action) =>
         this.starWarsApiService.getPerson(action.personId).pipe(
           switchMap((person) => {
-            this.store.dispatch(setPerson({ person }));
             const actionsToReturn: Action[] = [
+              setPerson({ person }),
               fetchFilms({ films: person.films }),
               fetchStarships({ ships: person.starships }),
               fetchVehicles({ vehicles: person.vehicles }),
             ];
 
             return actionsToReturn;
+          }),
+          catchError(() => {
+            alert('Person not found');
+            return of(setPerson({ person: null }));
           })
         )
       )

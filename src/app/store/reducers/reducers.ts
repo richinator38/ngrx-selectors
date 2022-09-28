@@ -16,6 +16,7 @@ export const AppReducer = createReducer(
   on(setPerson, (state, { person }) => ({
     ...state,
     currentPerson: person,
+    apiStuff: null,
   })),
   on(setFilms, (state, { films }) => ({
     ...state,

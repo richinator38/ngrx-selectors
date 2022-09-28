@@ -1,3 +1,15 @@
+<form (ngSubmit)="getPerson()">
+  <span style="font-weight: bold">Select Person:&nbsp;</span>
+  <input
+    id="person"
+    name="person"
+    [(ngModel)]="selectedPerson"
+    type="number"
+    max="83"
+    min="1"
+  />&nbsp;
+  <button type="submit">Get Person</button>
+</form>
 <app-people [peopleData]="personComponentData$ | async"></app-people>
 <app-films [films]="(additionalApiData$ | async).films"></app-films>
 <app-starships [ships]="(additionalApiData$ | async).ships"></app-starships>
