@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
 
@@ -11,11 +11,11 @@ import {
   fetchStarships,
   fetchVehicles,
   setFilms,
+  setLastPersonId,
   setPerson,
   setStarships,
   setVehicles,
 } from '../actions/actions';
-import { IApp } from '../app.interface';
 
 @Injectable()
 export class AppEffects {
@@ -26,6 +26,7 @@ export class AppEffects {
         this.starWarsApiService.getPerson(action.personId).pipe(
           switchMap((person) => {
             const actionsToReturn: Action[] = [
+              setLastPersonId({ personId: action.personId.toString() }),
               setPerson({ person }),
               fetchFilms({ films: person.films }),
               fetchStarships({ ships: person.starships }),
@@ -78,7 +79,6 @@ export class AppEffects {
 
   constructor(
     private actions$: Actions,
-    private starWarsApiService: StarWarsApiService,
-    private store: Store<IApp>
+    private starWarsApiService: StarWarsApiService
   ) {}
 }

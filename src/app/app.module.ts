@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { FilmsComponent } from './films/films.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { FormsModule } from '@angular/forms';
+import { OpeningCrawlComponent } from './opening-crawl/opening-crawl.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     FilmsComponent,
     StarshipsComponent,
     VehiclesComponent,
+    OpeningCrawlComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,8 @@ import { FormsModule } from '@angular/forms';
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([AppEffects]),
+    // Connects RouterModule with StoreModule, uses MinimalRouterStateSerializer by default
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

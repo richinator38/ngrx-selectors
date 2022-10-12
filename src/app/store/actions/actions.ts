@@ -41,3 +41,8 @@ export const setVehicles = createAction(
   '[Star Wars] setVehicles',
   props<{ vehicles: Vehicle[] }>()
 );
+
+export const setLastPersonId = createAction(
+  '[Star Wars] setLastPersonId',
+  props<{ personId: string }>()
+);

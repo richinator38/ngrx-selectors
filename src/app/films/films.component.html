@@ -1,9 +1,11 @@
 <div *ngIf="films != null">
   <h2>Films</h2>
   <ul>
-    <li *ngFor="let film of films" [title]="film.opening_crawl">
+    <li *ngFor="let film of films">
       <span class="title-text"
-        >Episode {{ film.episode_id }} - {{ film.title }}</span
+        ><a [routerLink]="'/opening-crawl/' + film.episode_id"
+          >Episode {{ film.episode_id }} - {{ film.title }}</a
+        ></span
       >
       <span class="director-text"
         >&nbsp;[Directed by {{ film.director }}, Produced by

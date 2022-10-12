@@ -1,21 +1,15 @@
-import {
-  AdditionalApiViewModel,
-  Film,
-  People,
-  Starship,
-  Vehicle,
-} from '../models';
+import { RouterReducerState } from '@ngrx/router-store';
+import { AdditionalApiViewModel, People } from '../models';
 
 export interface IApp {
   currentPerson?: People;
-  // films?: Film[];
-  // ships?: Starship[];
-  // vehicles?: Vehicle[];
+  lastPersonId?: string;
   apiStuff?: AdditionalApiViewModel;
 }
 
 export interface IAppState {
   AppState: IApp;
+  router: RouterReducerState;
 }
 
 export const initialAppState: IApp = { currentPerson: undefined };

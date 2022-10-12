@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 
 import { IAppState } from '../store/app.interface';
 import { fetchPerson } from '../store/actions/actions';
@@ -8,28 +9,52 @@ import { AdditionalApiViewModel, PeopleComponentViewModel } from '../models';
 import {
   getPeopleComponentData,
   getAdditionalApiData,
+  getStarWarsContainerComponentData,
 } from '../store/selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-starwars-container',
   templateUrl: './starwars-container.component.html',
   styleUrls: ['./starwars-container.component.css'],
 })
-export class StarwarsContainerComponent implements OnInit {
+export class StarwarsContainerComponent implements OnInit, OnDestroy {
   personComponentData$: Observable<PeopleComponentViewModel>;
   additionalApiData$: Observable<AdditionalApiViewModel>;
-  selectedPerson: string = '1';
+  selectedPerson: string;
+  subscription = new Subscription();
 
-  constructor(private store: Store<IAppState>) {}
+  constructor(private store: Store<IAppState>, private router: Router) {}
 
   ngOnInit(): void {
     this.personComponentData$ = this.store.pipe(select(getPeopleComponentData));
     this.additionalApiData$ = this.store.pipe(select(getAdditionalApiData));
 
-    this.getPerson();
+    this.subscription.add(
+      this.store
+        .pipe(
+          select(getStarWarsContainerComponentData),
+          filter((vm) => vm != null && vm.currentPersonId != null)
+        )
+        .subscribe((vm) => {
+          this.selectedPerson = vm.currentPersonId;
+
+          if (vm.shouldGetPerson) {
+            this.getPerson();
+          }
+        })
+    );
   }
 
   getPerson() {
     this.store.dispatch(fetchPerson({ personId: +this.selectedPerson }));
+  }
+
+  changeRoute() {
+    this.router.navigateByUrl(`/person/${this.selectedPerson}`);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

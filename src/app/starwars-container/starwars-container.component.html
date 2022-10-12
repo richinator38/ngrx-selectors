@@ -1,12 +1,10 @@
-<form (ngSubmit)="getPerson()">
+<form (ngSubmit)="changeRoute()">
   <span style="font-weight: bold">Select Person:&nbsp;</span>
   <input
     id="person"
     name="person"
     [(ngModel)]="selectedPerson"
     type="number"
-    max="83"
-    min="1"
   />&nbsp;
   <button type="submit">Get Person</button>
 </form>
