@@ -12,6 +12,7 @@ import {
   getStarWarsContainerComponentData,
 } from '../store/selectors';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-starwars-container',
@@ -24,9 +25,14 @@ export class StarwarsContainerComponent implements OnInit, OnDestroy {
   selectedPerson: string;
   subscription = new Subscription();
 
-  constructor(private store: Store<IAppState>, private router: Router) {}
+  constructor(
+    private store: Store<IAppState>,
+    private router: Router,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('NGRX Selectors');
     this.personComponentData$ = this.store.pipe(select(getPeopleComponentData));
     this.additionalApiData$ = this.store.pipe(select(getAdditionalApiData));
 
