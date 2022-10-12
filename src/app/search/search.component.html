@@ -1,4 +1,4 @@
-<a [routerLink]="'/person/' + lastPersonId">Back to main page</a>
+<a [routerLink]="'/person/' + (lastPersonId$ | async)">Back to main page</a>
 <form style="margin-top: 20px" (ngSubmit)="search()">
   <span style="font-weight: bold">Search People on Star Wars API:&nbsp;</span>
   <input

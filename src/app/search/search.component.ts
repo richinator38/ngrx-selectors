@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { searchForPeople } from './store/actions/search.actions';
 import { ISearchState } from './store/search.interface';
@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   peopleSearchText: string;
   subscription = new Subscription();
   results: string;
-  lastPersonId: string;
+  lastPersonId$: Observable<string>;
 
   constructor(private title: Title, private store: Store<ISearchState>) {}
 
@@ -30,11 +30,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.subscription.add(
-      this.store
-        .pipe(select(getLastPersonId))
-        .subscribe((personId) => (this.lastPersonId = personId))
-    );
+    this.lastPersonId$ = this.store.pipe(select(getLastPersonId));
   }
 
   search() {
