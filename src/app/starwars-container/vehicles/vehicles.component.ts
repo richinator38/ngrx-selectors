@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Vehicle } from '../models';
+import { Vehicle } from '../../models';
 
 @Component({
   selector: 'app-vehicles',

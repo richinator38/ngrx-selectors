@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Film, People, Starship, Vehicle } from '../models';
 import { forkJoin, Observable } from 'rxjs';
+import { ISearchResponse } from '../search/store/search.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StarWarsApiService {
@@ -32,5 +33,11 @@ export class StarWarsApiService {
       vehicleGets.push(this.http.get<Vehicle>(vehicleUrl))
     );
     return forkJoin(vehicleGets);
+  }
+
+  searchForPeople(peopleSearchText: string): Observable<ISearchResponse> {
+    return this.http.get<ISearchResponse>(
+      `${this.baseUrl}people/?search=${peopleSearchText}`
+    );
   }
 }

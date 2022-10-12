@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Film } from '../models';
+import { Film } from '../../models';
 
 @Component({
   selector: 'app-films',

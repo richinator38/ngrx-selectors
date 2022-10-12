@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Starship } from '../models';
+import { Starship } from '../../models';
 
 @Component({
   selector: 'app-starships',

@@ -7,7 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { PeopleComponentViewModel } from '../models/people.component.view-model';
+import { PeopleComponentViewModel } from '../../models/people.component.view-model';
 
 @Component({
   selector: 'app-people',
