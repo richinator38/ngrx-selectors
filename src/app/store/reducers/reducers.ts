@@ -10,7 +10,7 @@ import {
 } from '../actions/actions';
 import { AdditionalApiViewModel } from 'src/app/models';
 
-export const userFeatureKey = 'AppState';
+export const appRootKey = 'AppState';
 
 export const AppReducer = createReducer(
   initialAppState,

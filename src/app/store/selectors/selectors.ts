@@ -1,14 +1,23 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { IApp } from '../app.interface';
-import { userFeatureKey } from '../reducers/reducers';
-import { selectRouteParam } from './router.selectors';
+import { appRootKey } from '../reducers/reducers';
 
-export const getAppState = createFeatureSelector<IApp>(userFeatureKey);
+export const getAppState = createFeatureSelector<IApp>(appRootKey);
 
 export const getCurrentPerson = createSelector(
   getAppState,
   (state) => state?.currentPerson
+);
+
+export const getAdditionalData = createSelector(
+  getAppState,
+  (state) => state?.apiStuff
+);
+
+export const getLastPersonId = createSelector(
+  getAppState,
+  (state) => state?.lastPersonId
 );
 
 export const getPersonName = createSelector(
@@ -28,16 +37,6 @@ export const getPersonHeight = createSelector(
   (person) => person?.height
 );
 
-export const getAdditionalData = createSelector(
-  getAppState,
-  (state) => state?.apiStuff
-);
-
-export const getLastPersonId = createSelector(
-  getAppState,
-  (state) => state?.lastPersonId
-);
-
 export const getFilms = createSelector(
   getAdditionalData,
   (data) => data?.films
@@ -52,5 +51,3 @@ export const getVehicles = createSelector(
   getAdditionalData,
   (data) => data?.vehicles
 );
-
-export const getPersonNumberFromRoute = selectRouteParam('personNumber');

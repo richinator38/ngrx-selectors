@@ -28,7 +28,7 @@ export interface ISearch {
   searchResponse: ISearchResponse;
 }
 
-export interface ISearchState extends IAppState {
+export interface ISearchState {
   search: ISearch;
 }
 

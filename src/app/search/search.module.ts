@@ -18,9 +18,7 @@ import {
     CommonModule,
     FormsModule,
     SearchRoutingModule,
-    StoreModule.forFeature(searchFeatureKey, {
-      search: SearchReducer,
-    }),
+    StoreModule.forFeature(searchFeatureKey, { search: SearchReducer }),
     EffectsModule.forFeature([SearchEffects]),
   ],
 })
